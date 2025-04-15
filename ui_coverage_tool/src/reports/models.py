@@ -1,18 +1,10 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field, ConfigDict, FilePath, HttpUrl
-from swagger_coverage_tool.config import ServiceConfig, Settings
+from pydantic import BaseModel, Field, ConfigDict
 
-from ui_coverage_tool.config import AppConfig
+from ui_coverage_tool.config import Settings, AppConfig
 from ui_coverage_tool.src.coverage.models import AppCoverage
 from ui_coverage_tool.src.tools.types import AppKey
-
-
-class CoverageReportServiceConfig(ServiceConfig):
-    model_config = ConfigDict(populate_by_name=True)
-
-    swagger_url: HttpUrl | None = Field(alias="swaggerUrl", default=None)
-    swagger_file: FilePath | None = Field(alias="swaggerFile", default=None)
 
 
 class CoverageReportConfig(BaseModel):

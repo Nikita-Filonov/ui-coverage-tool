@@ -20,7 +20,7 @@ class UICoverageTrackerStorage:
             return CoverageResultList(root=[])
 
         results = [
-            CoverageResultList.model_validate_json(file.read_text())
+            CoverageResult.model_validate_json(file.read_text())
             for file in results_dir.glob("*.json") if file.is_file()
         ]
 

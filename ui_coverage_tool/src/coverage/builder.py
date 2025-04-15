@@ -37,7 +37,7 @@ class UICoverageBuilder:
 
     def build(self) -> AppCoverage:
         return AppCoverage(
-            history=self.history_builder.get_total_app_history(
+            history=self.history_builder.get_app_history(
                 actions=[
                     ActionHistory(type=action, count=results.total_actions)
                     for action, results in self.results_list.grouped_by_action.items()

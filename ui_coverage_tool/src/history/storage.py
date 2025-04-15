@@ -1,5 +1,5 @@
 from ui_coverage_tool.config import Settings
-from ui_coverage_tool.src.history.models import CoverageHistoryState, AppHistory
+from ui_coverage_tool.src.history.models import CoverageHistoryState, AppHistoryState
 from ui_coverage_tool.src.history.selector import build_selector_key
 from ui_coverage_tool.src.reports.models import CoverageReportState
 from ui_coverage_tool.src.tools.logger import get_logger
@@ -42,7 +42,7 @@ class UICoverageHistoryStorage:
     def save_from_report(self, report: CoverageReportState):
         state = CoverageHistoryState(
             apps={
-                app.key: AppHistory(
+                app.key: AppHistoryState(
                     total=report.apps_coverage[app.key].history,
                     elements={
                         build_selector_key(element.selector, element.selector_type): element.history

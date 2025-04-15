@@ -18,7 +18,7 @@ class ElementHistory(BaseModel):
     created_at: datetime = Field(alias="createdAt")
 
 
-class TotalAppHistory(BaseModel):
+class AppHistory(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
 
     actions: list[ActionHistory]
@@ -27,10 +27,10 @@ class TotalAppHistory(BaseModel):
     total_elements: int = Field(alias="totalElements")
 
 
-class AppHistory(BaseModel):
-    total: list[TotalAppHistory]
-    elements: dict[str, list[ElementHistory]]
+class AppHistoryState(BaseModel):
+    total: list[AppHistory] = Field(default_factory=list)
+    elements: dict[str, list[ElementHistory]] = Field(default_factory=dict)
 
 
 class CoverageHistoryState(BaseModel):
-    apps: dict[AppKey, AppHistory] = Field(default_factory=dict)
+    apps: dict[AppKey, AppHistoryState] = Field(default_factory=dict)

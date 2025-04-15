@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 
-from ui_coverage_tool.src.history.models import ElementHistory, TotalAppHistory
+from ui_coverage_tool.src.history.models import ElementHistory, AppHistory
 from ui_coverage_tool.src.tools.actions import ActionType
 from ui_coverage_tool.src.tools.selector import SelectorType
 from ui_coverage_tool.src.tools.types import Selector
@@ -21,5 +21,5 @@ class ElementCoverage(BaseModel):
 
 
 class AppCoverage(BaseModel):
-    history: list[TotalAppHistory]
+    history: list[AppHistory]
     elements: list[ElementCoverage]

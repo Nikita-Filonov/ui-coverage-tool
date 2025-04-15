@@ -57,15 +57,3 @@ class CoverageResultList(RootModel):
     def count_action(self, action_type: ActionType) -> int:
         counter = Counter(r.action_type for r in self.root)
         return counter.get(action_type, 0)
-
-
-r = CoverageResultList(
-    root=[
-        CoverageResult(selector="#user", selector_type=SelectorType.CSS, action_type=ActionType.FILL),
-        CoverageResult(selector="#user", selector_type=SelectorType.XPATH, action_type=ActionType.FILL),
-        CoverageResult(selector="#user", selector_type=SelectorType.CSS, action_type=ActionType.FILL),
-        CoverageResult(selector="#user", selector_type=SelectorType.XPATH, action_type=ActionType.CLICK),
-        CoverageResult(selector="#user", selector_type=SelectorType.CSS, action_type=ActionType.FILL)
-    ]
-)
-print(r.grouped_by_action)
