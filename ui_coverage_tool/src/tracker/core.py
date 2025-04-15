@@ -8,7 +8,7 @@ logger = get_logger("UI_COVERAGE_TRACKER_STORAGE")
 
 
 class UICoverageTracker:
-    def __init__(self, app: AppKey, settings: Settings | None = None):
+    def __init__(self, app: str, settings: Settings | None = None):
         self.app = app
         self.settings = settings or get_settings()
 
@@ -22,7 +22,7 @@ class UICoverageTracker:
     ):
         self.storage.save(
             CoverageResult(
-                app=self.app,
+                app=AppKey(self.app),
                 selector=Selector(selector),
                 action_type=action_type,
                 selector_type=selector_type
