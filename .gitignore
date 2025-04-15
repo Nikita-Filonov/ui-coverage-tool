@@ -1,0 +1,12 @@
+coverage-results
+
+.env
+.idea
+.DS_Store
+
+__pycache__
+
+coverage-history.json
+coverage-report.json
+index.html
+!docs/index.html
