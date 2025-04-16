@@ -53,9 +53,9 @@ class Settings(BaseSettings):
     @property
     def html_report_template_file(self):
         try:
-            return importlib.resources.files("swagger_coverage_tool.src.reports.templates") / "index.html"
+            return importlib.resources.files("ui_coverage_tool.src.reports.templates") / "index.html"
         except importlib.metadata.PackageNotFoundError:
-            return Path(os.path.join(os.getcwd(), "swagger_coverage_tool/src/reports/templates/index.html"))
+            return Path(os.path.join(os.getcwd(), "ui_coverage_tool/src/reports/templates/index.html"))
 
     @classmethod
     def settings_customise_sources(
