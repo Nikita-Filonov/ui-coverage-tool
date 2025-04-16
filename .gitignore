@@ -8,5 +8,5 @@ __pycache__
 
 coverage-history.json
 coverage-report.json
-index.html
+/index.html
 !docs/index.html
