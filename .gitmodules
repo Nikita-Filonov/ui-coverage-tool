@@ -1,0 +1,3 @@
+[submodule "submodules/ui-coverage-report"]
+	path = submodules/ui-coverage-report
+	url = https://github.com/Nikita-Filonov/ui-coverage-report
