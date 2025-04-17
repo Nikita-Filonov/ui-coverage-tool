@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="ui-coverage-tool",
-    version="0.11.0",
+    version="0.13.0",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -18,7 +18,10 @@ setup(
     },
     author="Nikita Filonov",
     author_email="filonov.nikitkaa@gmail.com",
-    description="TODO",
+    description=(
+        "UI Coverage Tool is an innovative, no-overhead solution for tracking and visualizing "
+        "UI test coverage — directly on your actual application, not static snapshots."
+    ),
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Nikita-Filonov/ui-coverage-tool",
