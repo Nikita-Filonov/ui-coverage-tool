@@ -1,10 +1,7 @@
 from ui_coverage_tool.config import Settings, get_settings
-from ui_coverage_tool.src.tools.logger import get_logger
 from ui_coverage_tool.src.tools.types import Selector, AppKey
 from ui_coverage_tool.src.tracker.models import SelectorType, ActionType, CoverageResult
 from ui_coverage_tool.src.tracker.storage import UICoverageTrackerStorage
-
-logger = get_logger("UI_COVERAGE_TRACKER_STORAGE")
 
 
 class UICoverageTracker:
