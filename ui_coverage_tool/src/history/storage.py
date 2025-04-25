@@ -32,6 +32,10 @@ class UICoverageHistoryStorage:
     def save(self, state: CoverageHistoryState):
         history_file = self.settings.history_file
 
+        if not history_file:
+            logger.debug("History file path is not defined, skipping history save")
+            return
+
         try:
             history_file.touch(exist_ok=True)
             history_file.write_text(state.model_dump_json(by_alias=True))
