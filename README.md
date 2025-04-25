@@ -178,8 +178,9 @@ tracker.track_coverage('//button[@id="login-button"]', ActionType.CLICK, Selecto
 
 ### Coverage Report Generation
 
-After every call to `tracker.track_coverage(`), the tool automatically stores coverage data in the `./coverage-results/`
-directory as JSON files. You don’t need to manually manage the folder — it’s created and populated automatically.
+After every call to `tracker.track_coverage(...)`, the tool automatically stores coverage data in
+the `./coverage-results/` directory as JSON files. You don’t need to manually manage the folder — it’s created and
+populated automatically.
 
 ```
 ./coverage-results/
