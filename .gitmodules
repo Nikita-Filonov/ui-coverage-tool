@@ -1,4 +1,4 @@
 [submodule "submodules/ui-coverage-report"]
 	path = submodules/ui-coverage-report
 	url = https://github.com/Nikita-Filonov/ui-coverage-report
-	tag = v0.11.0
+	tag = v0.13.0
