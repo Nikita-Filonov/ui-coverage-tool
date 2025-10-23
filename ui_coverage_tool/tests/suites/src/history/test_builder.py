@@ -73,8 +73,11 @@ def test_append_history_appends_and_sorts(coverage_history_settings: Settings) -
     assert result[0].created_at < result[1].created_at
 
 
-def test_append_history_returns_empty_if_no_history_file(tmp_path: Path) -> None:
-    settings = Settings(results_dir=tmp_path / "results")
+def test_append_history_returns_empty_if_no_history_file(
+        tmp_path: Path,
+        settings: Settings
+) -> None:
+    settings.results_dir = tmp_path / "results"
     settings.history_file = None
     builder = UICoverageHistoryBuilder(AppHistoryState(), settings)
 

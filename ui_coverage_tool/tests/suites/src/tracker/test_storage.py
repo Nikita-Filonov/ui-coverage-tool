@@ -32,10 +32,11 @@ def test_save_creates_json_file(
 def test_save_creates_dir_if_missing(
         caplog: pytest.LogCaptureFixture,
         tmp_path: Path,
+        settings: Settings,
         coverage_result: CoverageResult,
 ) -> None:
     results_dir: Path = tmp_path / "nested" / "results"
-    settings = Settings(results_dir=results_dir)
+    settings.results_dir = results_dir
     storage = UICoverageTrackerStorage(settings)
 
     assert not results_dir.exists()
@@ -66,9 +67,12 @@ def test_save_logs_error(
 # TEST: load
 # -------------------------------
 
-def test_load_returns_empty_if_dir_missing(tmp_path: Path, caplog: pytest.LogCaptureFixture) -> None:
-    missing_dir: Path = tmp_path / "missing"
-    settings = Settings(results_dir=missing_dir)
+def test_load_returns_empty_if_dir_missing(
+        caplog: pytest.LogCaptureFixture,
+        tmp_path: Path,
+        settings: Settings
+) -> None:
+    settings.results_dir = tmp_path / "missing"
     storage = UICoverageTrackerStorage(settings)
 
     result: CoverageResultList = storage.load()

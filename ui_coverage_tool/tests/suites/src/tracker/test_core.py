@@ -25,7 +25,7 @@ def test_init_uses_default_settings(monkeypatch: pytest.MonkeyPatch) -> None:
 
     def fake_get_settings() -> Settings:
         called["used"] = True
-        return Settings()
+        return Settings(apps=[])
 
     monkeypatch.setattr("ui_coverage_tool.src.tracker.core.get_settings", fake_get_settings)
 

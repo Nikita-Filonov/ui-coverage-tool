@@ -32,7 +32,7 @@ def test_init_creates_valid_report_state(settings: Settings) -> None:
 
 
 def test_init_with_empty_settings() -> None:
-    empty_settings = Settings()
+    empty_settings = Settings(apps=[])
     state = CoverageReportState.init(empty_settings)
 
     assert isinstance(state, CoverageReportState)
