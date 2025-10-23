@@ -1,5 +1,11 @@
 # UI Coverage Tool
 
+[![CI](https://github.com/Nikita-Filonov/ui-coverage-tool/actions/workflows/workflow-test.yml/badge.svg)](https://github.com/Nikita-Filonov/ui-coverage-tool/actions/workflows/workflow-test.yml)
+[![codecov](https://codecov.io/gh/Nikita-Filonov/ui-coverage-tool/branch/main/graph/badge.svg)](https://codecov.io/gh/Nikita-Filonov/ui-coverage-tool)
+[![PyPI version](https://img.shields.io/pypi/v/ui-coverage-tool.svg)](https://pypi.org/project/ui-coverage-tool/)
+[![License](https://img.shields.io/github/license/Nikita-Filonov/ui-coverage-tool)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Nikita-Filonov/ui-coverage-tool?style=social)](https://github.com/Nikita-Filonov/ui-coverage-tool/stargazers)
+
 **UI Coverage Tool** is an innovative, no-overhead solution for tracking and visualizing UI test coverage — directly on
 your actual application, not static snapshots. The tool collects coverage during UI test execution and generates an
 interactive HTML report. This report embeds a live iframe of your application and overlays coverage data on top, letting

@@ -32,7 +32,7 @@ class UICoverageTrackerStorage:
 
         if not results_dir.exists():
             logger.info(f"Results directory does not exist, creating: {results_dir}")
-            results_dir.mkdir(exist_ok=True)
+            results_dir.mkdir(parents=True, exist_ok=True)
 
         result_file = results_dir.joinpath(f'{uuid.uuid4()}.json')
 

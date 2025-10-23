@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ui-coverage-tool"
+version = "0.32.0"
+description = "UI Coverage Tool is an innovative, no-overhead solution for tracking and visualizing UI test coverage — directly on your actual application, not static snapshots."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+authors = [
+    { name = "Nikita Filonov", email = "filonov.nikitkaa@gmail.com" }
+]
+maintainers = [
+    { name = "Nikita Filonov", email = "filonov.nikitkaa@gmail.com" }
+]
+keywords = [
+    "python",
+    "coverage",
+    "ui-coverage",
+    "ui-testing",
+    "test-coverage",
+    "frontend-testing",
+    "visual-testing",
+    "automation",
+    "qa",
+    "quality-assurance",
+    "reporting",
+    "html-report",
+    "pytest",
+    "selenium",
+    "playwright",
+    "web-testing",
+    "test-analytics"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance"
+]
+requires-python = ">=3.11"
+
+dependencies = [
+    "click==8.1.8",
+    "pyyaml==6.0.2",
+    "pydantic==2.11.3",
+    "pydantic-settings==2.8.1"
+]
+
+[project.urls]
+Homepage = "https://github.com/Nikita-Filonov/ui-coverage-tool"
+Repository = "https://github.com/Nikita-Filonov/ui-coverage-tool"
+Issues = "https://github.com/Nikita-Filonov/ui-coverage-tool/issues"
+
+[project.scripts]
+ui-coverage-tool = "ui_coverage_tool.cli.main:cli"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ui_coverage_tool*"]
+
+[tool.setuptools.package-data]
+"ui_coverage_tool" = ["config.py"]
+"ui_coverage_tool.cli" = ["**/*"]
+"ui_coverage_tool.src" = ["**/*"]
