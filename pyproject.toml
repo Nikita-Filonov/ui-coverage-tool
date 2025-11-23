@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ui-coverage-tool"
-version = "0.32.0"
+version = "0.33.0"
 description = "UI Coverage Tool is an innovative, no-overhead solution for tracking and visualizing UI test coverage — directly on your actual application, not static snapshots."
 readme = { file = "README.md", content-type = "text/markdown" }
 license = { file = "LICENSE" }
@@ -46,10 +46,10 @@ classifiers = [
 requires-python = ">=3.11"
 
 dependencies = [
-    "click==8.1.8",
-    "pyyaml==6.0.2",
-    "pydantic==2.11.3",
-    "pydantic-settings==2.8.1"
+    "click",
+    "pyyaml",
+    "pydantic",
+    "pydantic-settings"
 ]
 
 [project.urls]
