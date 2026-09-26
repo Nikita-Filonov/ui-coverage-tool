@@ -1,4 +1,5 @@
 import json
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -41,6 +42,35 @@ def test_inject_state_into_html_replaces_script_tag(
     assert '<script id="state" type="application/json">' in result_html
     assert 'OLD_STATE' not in result_html
     assert 'createdAt' in result_html
+
+
+def test_packaged_report_template_embeds_its_application(
+        reports_storage: UIReportsStorage,
+        coverage_report_state: CoverageReportState,
+):
+    class AssetParser(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.scripts = []
+            self.stylesheets = []
+
+        def handle_starttag(self, tag, attrs):
+            attributes = dict(attrs)
+            if tag == 'script':
+                self.scripts.append(attributes)
+            if tag == 'link' and attributes.get('rel') == 'stylesheet':
+                self.stylesheets.append(attributes.get('href', ''))
+
+    html = reports_storage.inject_state_into_html(coverage_report_state)
+    parser = AssetParser()
+    parser.feed(html)
+
+    assert len(parser.scripts) == 2
+    assert all('src' not in script for script in parser.scripts)
+    assert any(script.get('type') == 'module' for script in parser.scripts)
+    assert any(script.get('id') == 'state' for script in parser.scripts)
+    assert not any(href.startswith(('./', '/')) for href in parser.stylesheets)
+    assert 'createdAt' in html
 
 
 def test_inject_state_into_html_returns_original_if_no_script(

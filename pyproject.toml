@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ui-coverage-tool"
-version = "0.33.0"
+version = "0.34.0"
 description = "UI Coverage Tool is an innovative, no-overhead solution for tracking and visualizing UI test coverage — directly on your actual application, not static snapshots."
 readme = { file = "README.md", content-type = "text/markdown" }
 license = { file = "LICENSE" }
