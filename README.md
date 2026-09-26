@@ -185,8 +185,8 @@ tracker.track_coverage('//button[@id="login-button"]', ActionType.CLICK, Selecto
 ### Coverage Report Generation
 
 After every call to `tracker.track_coverage(...)`, the tool automatically stores coverage data in
-the `./coverage-results/` directory as JSON files. You don’t need to manually manage the folder — it’s created and
-populated automatically.
+the `./coverage-results/` directory as JSON files. The folder is created automatically, and its files remain there
+between test runs.
 
 ```
 ./coverage-results/
@@ -201,6 +201,8 @@ command:
 ```shell
 ui-coverage-tool save-report
 ```
+
+`save-report` includes every coverage result in the configured `results_dir`, including files from earlier test runs.
 
 This will generate:
 
@@ -333,8 +335,6 @@ Once configured, the tool automatically:
 - Writes raw coverage data to `coverage-results/`.
 - Stores optional historical data and generates an HTML report at the end.
 
-No manual data manipulation is required – the tool handles everything automatically based on your config.
-
 ## Command-Line Interface (CLI)
 
 The UI Coverage Tool provides several CLI commands to help with managing and generating coverage reports.
@@ -385,6 +385,18 @@ ui-coverage-tool print-config
   and prints the final configuration values to the console.
 - It helps verify that the correct settings are being applied and is particularly useful if something is not working as
   expected.
+
+### Command: `clear-results`
+
+Removes JSON files from the configured `results_dir`. Run it before starting a new test run when the next report should
+include only that run. Keep `results_dir` dedicated to coverage results: all JSON files there are removed except
+configured history and report files. Non-JSON files are preserved.
+
+**Usage:**
+
+```shell
+ui-coverage-tool clear-results
+```
 
 ## Troubleshooting
 

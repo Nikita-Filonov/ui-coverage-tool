@@ -14,6 +14,26 @@ from ui_coverage_tool.src.tracker.core import UICoverageTracker
 runner = CliRunner()
 
 
+def test_clear_results_reports_deletion_error(
+        settings: Settings,
+        monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    file = settings.results_dir / "123e4567-e89b-42d3-a456-426614174000.json"
+    file.write_text("keep", encoding="utf-8")
+    monkeypatch.setattr("ui_coverage_tool.cli.commands.clear_results.get_settings", lambda: settings)
+
+    def fail_unlink(self: Path) -> None:
+        raise OSError("permission denied")
+
+    monkeypatch.setattr(Path, "unlink", fail_unlink)
+
+    result = runner.invoke(cli, ["clear-results"])
+
+    assert result.exit_code != 0
+    assert "permission denied" in result.output
+    assert file.exists()
+
+
 def test_print_config_outputs_resolved_settings(
         settings: Settings,
         monkeypatch: pytest.MonkeyPatch,
@@ -130,6 +150,27 @@ def test_save_report_builds_separate_app_reports_and_embeds_json(
     assert json.loads(match.group(1)) == report
     history = json.loads(reports_settings.history_file.read_text(encoding="utf-8"))
     assert history["apps"]["test-service"]["total"] == first_coverage["history"]
+
+
+def test_clear_results_between_reports_excludes_previous_run(
+        reports_settings: Settings,
+        report_template: Path,
+        monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr("ui_coverage_tool.cli.commands.clear_results.get_settings", lambda: reports_settings)
+    monkeypatch.setattr("ui_coverage_tool.cli.commands.save_report.get_settings", lambda: reports_settings)
+    tracker = UICoverageTracker(app="test-service", settings=reports_settings)
+
+    tracker.track_coverage("#save", ActionType.CLICK, SelectorType.CSS)
+    assert runner.invoke(cli, ["save-report"]).exit_code == 0
+    assert runner.invoke(cli, ["clear-results"]).exit_code == 0
+    tracker.track_coverage("#save", ActionType.CLICK, SelectorType.CSS)
+    assert runner.invoke(cli, ["save-report"]).exit_code == 0
+
+    report = json.loads(reports_settings.json_report_file.read_text(encoding="utf-8"))
+    app = report["appsCoverage"]["test-service"]
+    assert [entry["totalActions"] for entry in app["history"]] == [1, 1]
+    assert app["elements"][0]["actions"] == [{"type": "CLICK", "count": 1}]
 
 
 def test_save_report_preserves_history_across_runs_with_retention_limit(
